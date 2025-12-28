@@ -21,6 +21,28 @@
     <button (click)="saveTask()" class="create-btn">Crear Tarea</button>
   </div>
 
+  <div class="filters-container" style="background: #f0f2f5; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center;">
+      <i class="fa-solid fa-filter" style="color: #666;"></i>
+      <strong>Filtrar por:</strong>
+    
+      <select [(ngModel)]="filterStatus" (change)="loadTasks()" class="form-input" style="width: 150px;">
+          <option value="">Todos los estados</option>
+          <option value="pending">Pendientes</option>
+          <option value="completed">Completadas</option>
+      </select>
+    
+      <select [(ngModel)]="filterUserId" (change)="loadTasks()" class="form-input" style="width: 200px;">
+          <option [ngValue]="null">Todos los usuarios</option>
+          <option *ngFor="let user of users" [value]="user.id">
+          {{ user.name }}
+          </option>
+      </select>
+    
+      <button (click)="filterStatus=''; filterUserId=null; loadTasks()" style="border: none; background: transparent; cursor: pointer; color: #dc3545; font-size: 0.9em;">
+          <i class="fa-solid fa-xmark"></i> Limpiar
+      </button>
+  </div>
+
   <div class="kanban-board">
     
     <div class="kanban-column pending-column">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
 import { Task } from '../../interfaces/task.interface';
 
 @Component({
@@ -13,9 +14,12 @@ import { Task } from '../../interfaces/task.interface';
 })
 export class TaskListComponent implements OnInit {
   
+  tasks: Task[] = [];
   pendingTasks: Task[] = [];
   completedTasks: Task[] = [];
   users: any[] = [];
+  filterStatus: string = '';
+  filterUserId: number | null = null;
 
   newTask: any = {
     title: '',
@@ -23,7 +27,7 @@ export class TaskListComponent implements OnInit {
     assignedUserId: null,
   };
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -31,24 +35,23 @@ export class TaskListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.taskService.getAllUsers().subscribe({
+    // Usamos el UserService (que creamos antes) en lugar de TaskService
+    this.userService.getAllUsers().subscribe({
       next: (data) => this.users = data,
       error: (err) => console.error('Error cargando usuarios:', err)
     });
   }
 
   loadTasks() {
-    this.taskService.getAllTasks().subscribe({
-      next: (data) => {
-        console.log('Tareas cargadas:', data);
-        // Filtramos las tareas en sus respectivas listas
-        this.pendingTasks = data.filter(t => t.status === 'pending');
-        this.completedTasks = data.filter(t => t.status === 'completed');
-      },
-      error: (error) => {
-        console.error('Error conectando al backend:', error);
-      }
-    });
+    // Pasamos los filtros al servicio
+    this.taskService.getTasks(this.filterStatus, this.filterUserId || undefined)
+      .subscribe((data: Task[]) => { // Tipamos la respuesta
+        this.tasks = data; // Ahora sí, 'this.tasks' existe y no dará error
+        
+        // Volvemos a separar las tareas para el Kanban
+        this.pendingTasks = this.tasks.filter(t => t.status === 'pending');
+        this.completedTasks = this.tasks.filter(t => t.status === 'completed');
+      });
   }
 
   saveTask() {

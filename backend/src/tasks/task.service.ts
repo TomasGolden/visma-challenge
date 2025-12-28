@@ -14,19 +14,12 @@ export class TaskService {
   findAll(status?: string, userId?: string) {
     const whereClause: any = {};
 
-    // Si nos envían estado, filtramos por eso
-    if (status) {
-      whereClause.status = status;
-    }
-
-    // Si nos envían usuario, filtramos por eso
-    if (userId) {
-      whereClause.assigned_user_id = userId; // Ojo: asegúrate que coincida con tu modelo
-    }
+    if (status) whereClause.status = status;
+    if (userId) whereClause.assigned_user_id = userId; // Asegúrate que coincida con tu columna en BD
 
     return this.taskModel.findAll({
       where: whereClause,
-      include: [User], // Seguimos trayendo los datos del usuario
+      include: [User],
       order: [['created_at', 'DESC']],
     });
   }

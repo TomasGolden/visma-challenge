@@ -1,13 +1,13 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, Query } from '@nestjs/common';
 import { TaskService } from './task.service';
 
-@Controller('tasks') // <--- IMPORTANTE: Esto define la ruta http://localhost:3000/tasks
+@Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Get()
-  getAll() {
-    return this.taskService.findAll();
+  findAll(@Query('status') status?: string, @Query('userId') userId?: string) {
+    return this.taskService.findAll(status, userId);
   }
 
   @Post()

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../interfaces/task.interface';
 
@@ -13,8 +13,14 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   // 1. Obtener todas las tareas
-  getAllTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+  getTasks(status?: string, userId?: number): Observable<any[]> {
+    let params = new HttpParams();
+
+    if (status) params = params.set('status', status);
+    if (userId) params = params.set('userId', userId.toString());
+
+    // Enviamos los params en la petición
+    return this.http.get<any[]>(this.apiUrl, { params });
   }
 
   // 2. Crear una tarea nueva
