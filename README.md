@@ -30,7 +30,7 @@ Aplicación Full Stack desarrollada para el desafío técnico de Visma. Se trata
 
 ---
 
-## ⚙️ Instalación y Configuración
+## Instalación y Configuración
 
 Sigue estos pasos para ejecutar el proyecto localmente.
 
