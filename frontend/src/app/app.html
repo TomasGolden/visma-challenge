@@ -1,0 +1,7 @@
+<div style="background: #333; padding: 15px; margin-bottom: 20px;">
+  <button (click)="showUsers = false" style="margin-right: 10px; padding: 5px 10px;"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Ver Tareas</button>
+  <button (click)="showUsers = true" style="padding: 5px 10px;"><i class="fa fa-users" aria-hidden="true"></i> Gestionar Usuarios</button>
+</div>
+
+<app-task-list *ngIf="!showUsers"></app-task-list>
+<app-user-list *ngIf="showUsers"></app-user-list>

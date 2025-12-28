@@ -1,0 +1,77 @@
+<div class="board-container">
+  <div class="board-header">
+    <h2><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Tablero de Tareas</h2>
+    <button (click)="loadTasks()" class="reload-btn">
+      <i class="fa-solid fa-rotate" aria-hidden="true"></i> Recargar
+    </button>
+  </div>
+
+  <div class="create-task-container">
+    <h3><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Crear Nueva Tarea</h3>
+    <div class="form-row">
+      <input type="text" placeholder="Título de la tarea..." [(ngModel)]="newTask.title" class="form-input title-input">
+      <select [(ngModel)]="newTask.assignedUserId" class="form-input user-select" style="width: 150px;">
+        <option [ngValue]="null" disabled selected> Asignar a...</option>
+         <option *ngFor="let user of users" [value]="user.id">
+            {{ user.name }}
+         </option>
+      </select> 
+    </div>
+    <textarea placeholder="Añadir una descripción más detallada..." [(ngModel)]="newTask.description" class="form-textarea"></textarea>
+    <button (click)="saveTask()" class="create-btn">Crear Tarea</button>
+  </div>
+
+  <div class="kanban-board">
+    
+    <div class="kanban-column pending-column">
+      <div class="column-header">
+        <h3>PENDIENTE <span class="count">({{ pendingTasks.length }})</span></h3>
+      </div>
+      <div class="task-list-container">
+        <div *ngFor="let task of pendingTasks" class="task-card">
+          <div class="task-title">{{ task.title }}</div>
+          <div class="task-description" *ngIf="task.description">{{ task.description }}</div>
+          <div class="task-footer">
+            <button (click)="toggleTaskStatus(task)" class="status-btn complete-btn"><i class="fa fa-check" aria-hidden="true"></i>
+                Completar
+            </button>
+            <div class="assignee">
+              <div class="avatar pending-avatar">
+                {{ task.assignedUser?.name?.charAt(0) || '?' }}
+              </div>
+              <span class="assignee-name">{{ task.assignedUser?.name || 'Sin Asignar' }}</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="pendingTasks.length === 0" class="no-tasks">No hay tareas pendientes.</div>
+      </div>
+    </div>
+
+    <div class="kanban-column completed-column">
+      <div class="column-header">
+        <h3>COMPLETADA <span class="count">({{ completedTasks.length }})</span></h3>
+      </div>
+      <div class="task-list-container">
+        <div *ngFor="let task of completedTasks" class="task-card completed-card">
+          <div class="task-title">
+            <span class="check-icon">✓</span> {{ task.title }}
+          </div>
+          <div class="task-description" *ngIf="task.description">{{ task.description }}</div>
+          <div class="task-footer">
+            <button (click)="toggleTaskStatus(task)" class="status-btn pending-btn"><i class="fa fa-undo" aria-hidden="true"></i>
+                Pendiente
+            </button>
+            <div class="assignee">
+              <div class="avatar completed-avatar">
+                {{ task.assignedUser?.name?.charAt(0) || '?' }}
+              </div>
+              <span class="assignee-name">{{ task.assignedUser?.name || 'Sin Asignar' }}</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="completedTasks.length === 0" class="no-tasks">No hay tareas completadas.</div>
+      </div>
+    </div>
+
+  </div>
+</div>

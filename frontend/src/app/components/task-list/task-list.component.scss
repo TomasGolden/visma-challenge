@@ -1,0 +1,241 @@
+/* Contenedor principal con fondo gris claro estilo Jira */
+.board-container {
+  padding: 20px;
+  background-color: #f4f5f7;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Cabecera y botón de recarga */
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.board-header h2 {
+  color: #172b4d;
+  margin: 0;
+}
+
+.reload-btn {
+  padding: 8px 12px;
+  background-color: #ebecf0;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #42526e;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.reload-btn:hover { background-color: #dfe1e6; }
+
+/* Formulario de creación */
+.create-task-container {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.1);
+}
+
+.create-task-container h3 {
+  margin-top: 0;
+  color: #172b4d;
+  font-size: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-input, .form-textarea {
+  padding: 10px;
+  border: 2px solid #dfe1e6;
+  border-radius: 4px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: #4c9aff;
+  outline: none;
+}
+
+.title-input { flex: 1; }
+.user-input { width: 100px; }
+.form-textarea { width: 100%; resize: vertical; height: 60px; }
+
+.create-btn {
+  background-color: #0052cc;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.create-btn:hover { background-color: #0065ff; }
+
+/* Estructura del Tablero Kanban */
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+/* Columnas */
+.kanban-column {
+  flex: 1;
+  min-width: 280px;
+  background-color: #ebecf0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  padding: 10px 5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.complete-btn {
+  background-color: #e3fcef; /* Verde muy claro */
+  color: #006644;
+}
+.complete-btn:hover { background-color: #36b37e; color: white; }
+
+.pending-btn {
+  background-color: #fff0b3; /* Amarillo muy claro */
+  color: #172b4d;
+}
+.pending-btn:hover { background-color: #ffab00; color: white; }
+
+.column-header h3 { margin: 0; }
+.count { font-weight: normal; margin-left: 5px; }
+
+/* Bordes de color para las columnas */
+.pending-column .column-header { border-top: 3px solid #ffc107; padding-top: 7px;}
+.completed-column .column-header { border-top: 3px solid #36b37e; padding-top: 7px; }
+
+.task-list-container { min-height: 50px; }
+
+/* Tarjetas de Tarea */
+.task-card {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 8px rgba(9, 30, 66, 0.2);
+  background-color: #fafbfc;
+}
+
+.task-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #172b4d;
+  margin-bottom: 8px;
+}
+
+.task-description {
+  font-size: 14px;
+  color: #42526e;
+  margin-bottom: 12px;
+  line-height: 1.4;
+    /* Limitar a 2 líneas con puntos suspensivos */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Footer de la tarjeta y Avatar */
+.task-footer {
+  display: flex;
+  justify-content: space-between; /* Separa el botón del avatar */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.pending-avatar { background-color: #ffab00; }
+.completed-avatar { background-color: #36b37e; }
+
+.assignee-name {
+  font-size: 13px;
+  color: #6b778c;
+}
+
+/* Estilos específicos para tarjetas completadas */
+.completed-card .task-title {
+  text-decoration: line-through;
+  color: #6b778c;
+}
+
+.check-icon {
+  color: #36b37e;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 20px;
+  color: #6b778c;
+  font-style: italic;
+  background: rgba(255,255,255,0.4);
+  border-radius: 4px;
+}
+
+.user-select {
+  cursor: pointer;
+  background-color: white;
+}
