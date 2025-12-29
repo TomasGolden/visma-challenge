@@ -1,0 +1,35 @@
+<div style="display: flex; gap: 20px; padding: 20px;">
+  
+  <div style="flex: 1; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h3><i class="fa fa-user" aria-hidden="true"></i> Nuevo Usuario</h3>
+    
+    <label>Nombre Completo:</label>
+    <input type="text" [(ngModel)]="newUser.name" placeholder="Ej: Tester VIP" 
+           style="width: 100%; padding: 8px; margin-bottom: 10px; display: block;">
+
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="newUser.email" placeholder="Ej: test@vip.com" 
+           style="width: 100%; padding: 8px; margin-bottom: 20px; display: block;">
+
+    <button (click)="createUser()" 
+            style="width: 100%; background: #28a745; color: white; padding: 10px; border: none; cursor: pointer;">
+      Guardar Usuario
+    </button>
+  </div>
+
+  <div style="flex: 1;">
+    <h3>Lista Actual ({{ users.length }})</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li *ngFor="let user of users" style="background: white; border-bottom: 1px solid #ccc; padding: 10px; display: flex; justify-content: space-between;">
+        <span>
+          <strong>{{ user.name }}</strong> <br>
+          <small style="color: gray">{{ user.email }}</small>
+        </span>
+        <span style="background: #eee; padding: 2px 6px; border-radius: 4px; font-size: 12px; height: fit-content;">
+          ID: {{ user.id }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+</div>
