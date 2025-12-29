@@ -123,13 +123,13 @@
 }
 
 .complete-btn {
-  background-color: #e3fcef; /* Verde muy claro */
+  background-color: #e3fcef;
   color: #006644;
 }
 .complete-btn:hover { background-color: #36b37e; color: white; }
 
 .pending-btn {
-  background-color: #fff0b3; /* Amarillo muy claro */
+  background-color: #fff0b3;
   color: #172b4d;
 }
 .pending-btn:hover { background-color: #ffab00; color: white; }
@@ -182,7 +182,7 @@
 /* Footer de la tarjeta y Avatar */
 .task-footer {
   display: flex;
-  justify-content: space-between; /* Separa el botón del avatar */
+  justify-content: space-between;
   align-items: center;
   margin-top: 10px;
 }

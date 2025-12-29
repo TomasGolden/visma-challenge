@@ -39,7 +39,6 @@ export class TaskService {
   }
 
   updateTask(id: number, status: string): Observable<any> {
-    // CAMBIO CLAVE: Cambiamos .patch() por .put()
     return this.http.put(`${this.apiUrl}/${id}`, { status });
   }
 

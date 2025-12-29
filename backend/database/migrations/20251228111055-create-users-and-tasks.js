@@ -22,8 +22,6 @@ module.exports = {
         allowNull: false,
         unique: true
       }
-      // Nota: No agregamos created_at/updated_at aquí porque el modelo User
-      // lo definimos con timestamps: false, aunque es buena práctica tenerlos.
     });
 
     /**
@@ -46,14 +44,14 @@ module.exports = {
         allowNull: true
       },
       status: {
-        type: Sequelize.STRING, // Usamos String para simplificar en DB, en código validamos ENUM
+        type: Sequelize.STRING,
         defaultValue: 'pending'
       },
       assigned_user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users', // Nombre de la tabla a la que referencia
+          model: 'users',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -73,7 +71,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    // El orden importa al borrar: primero tasks (que tiene la FK), luego users
     await queryInterface.dropTable('tasks');
     await queryInterface.dropTable('users');
   }

@@ -6,7 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { User } from '../users/user.model'; // Asegúrate que la ruta sea correcta
+import { User } from '../users/user.model';
 
 // Definimos los posibles estados
 export enum TaskStatus {
@@ -21,7 +21,7 @@ export class Task extends Model {
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id: number; // El 'declare' es importante para evitar el error que tuviste antes
+  declare id: number;
 
   @Column({
     type: DataType.STRING,
@@ -40,8 +40,6 @@ export class Task extends Model {
     defaultValue: TaskStatus.PENDING,
   })
   status: TaskStatus;
-
-  // --- RELACIONES (Esto es lo que permite el include: [User]) ---
 
   @ForeignKey(() => User)
   @Column({

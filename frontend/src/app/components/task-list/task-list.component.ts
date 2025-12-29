@@ -35,7 +35,6 @@ export class TaskListComponent implements OnInit {
   }
 
   loadUsers() {
-    // Usamos el UserService (que creamos antes) en lugar de TaskService
     this.userService.getAllUsers().subscribe({
       next: (data) => this.users = data,
       error: (err) => console.error('Error cargando usuarios:', err)
@@ -45,10 +44,9 @@ export class TaskListComponent implements OnInit {
   loadTasks() {
     // Pasamos los filtros al servicio
     this.taskService.getTasks(this.filterStatus, this.filterUserId || undefined)
-      .subscribe((data: Task[]) => { // Tipamos la respuesta
-        this.tasks = data; // Ahora sí, 'this.tasks' existe y no dará error
+      .subscribe((data: Task[]) => {
+        this.tasks = data;
         
-        // Volvemos a separar las tareas para el Kanban
         this.pendingTasks = this.tasks.filter(t => t.status === 'pending');
         this.completedTasks = this.tasks.filter(t => t.status === 'completed');
       });

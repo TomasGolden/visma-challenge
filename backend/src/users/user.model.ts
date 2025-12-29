@@ -1,7 +1,7 @@
 import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
 import { Task } from '../tasks/task.model';
 
-@Table({ tableName: 'users', timestamps: true, underscored: true }) // Timestamps false porque la consigna no pide created_at en users
+@Table({ tableName: 'users', timestamps: true, underscored: true })
 export class User extends Model {
   @Column({
     type: DataType.INTEGER,

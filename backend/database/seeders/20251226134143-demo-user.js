@@ -37,13 +37,13 @@ module.exports = {
     ], {});
 
     // 2. Crear Tareas Iniciales
-    // Asignamos tareas a los usuarios 1, 2 y 3 para probar
+    // Asigno tareas a los usuarios 1, 2 y 3 para probar
     await queryInterface.bulkInsert('tasks', [
       {
         title: 'Completar desafío técnico',
         description: 'Terminar el backend en NestJS y el frontend en Angular',
         status: 'pending',
-        assigned_user_id: 1, // Juan
+        assigned_user_id: 1,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -51,7 +51,7 @@ module.exports = {
         title: 'Revisar documentación',
         description: 'Leer los requisitos de Visma',
         status: 'completed',
-        assigned_user_id: 2, // Maria
+        assigned_user_id: 2,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -59,7 +59,7 @@ module.exports = {
         title: 'Preparar presentación',
         description: 'Crear slides para la demo',
         status: 'pending',
-        assigned_user_id: 3, // Carlos
+        assigned_user_id: 3,
         created_at: new Date(),
         updated_at: new Date()
       }

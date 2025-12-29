@@ -15,7 +15,7 @@ export class TaskService {
     const whereClause: any = {};
 
     if (status) whereClause.status = status;
-    if (userId) whereClause.assigned_user_id = userId; // Asegúrate que coincida con tu columna en BD
+    if (userId) whereClause.assigned_user_id = userId;
 
     return this.taskModel.findAll({
       where: whereClause,
@@ -32,7 +32,9 @@ export class TaskService {
   }
 
   async markAsPending(id: number) {
+    // Actualizamos solo el estado a 'pending'
     await this.taskModel.update({ status: 'pending' }, { where: { id } });
+    // Retornamos la tarea actualizada
     return this.taskModel.findByPk(id);
   }
 

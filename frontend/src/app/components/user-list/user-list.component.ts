@@ -41,8 +41,8 @@ export class UserListComponent implements OnInit {
     this.userService.createUser(this.newUser).subscribe({
       next: (usuarioCreado) => {
         alert('¡Usuario creado con éxito!');
-        this.users.push(usuarioCreado); // Lo agregamos a la lista visualmente
-        this.newUser = { name: '', email: '' }; // Limpiamos el formulario
+        this.users.push(usuarioCreado);
+        this.newUser = { name: '', email: '' };
       },
       error: (err) => {
         console.error(err);
